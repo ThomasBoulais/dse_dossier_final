@@ -80,7 +80,7 @@ A partir des réponses du questionnaire, les 2 personas suivants ont été défi
 
 Ce document de cadrage, proposé comme template par l'organisme de formation **DATASCIENTEST**, est un framework permettant d'identifier et de définir clairement les problèmes auxquels on souhaite répondre, les personas touchés ainsi que les impacts quantifiés, les solutions de contournement et opportunités pour notre application. 
 
-<center><img src='assets/synthese_discovery.png' height=1000></center>
+<center><img src='assets/synthese_discovery.png' height=1300></center>
 <!--
  | Synthèse de la Discovery | **Problème 1**<br>Temps de planification trop long | **Problème 2**<br>Manque de fiabilité et de complétude des informations | **Problème 3**<br>Optimisation d’itinéraire multi-contraintes difficile 
  | :-- | :-- | :-- | :-- 
