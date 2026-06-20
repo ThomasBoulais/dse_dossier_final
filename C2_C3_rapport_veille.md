@@ -31,7 +31,7 @@ Chacune des applications a ensuite été vérifiée en explorant les pages web p
 
 ### 2.3 Critère de sélection
 
-Les applications ont été distribuées parmi 3 catégories : `planning &    organizing`, `recommendations` et `search & booking`. Notre cas d'étude conserve uniquement les applications relevant du périmètre :
+Les applications ont été distribuées parmi 3 catégories : `planning & organizing`, `recommendations` et `search & booking`. Notre cas d'étude conserve uniquement les applications relevant du périmètre :
 - **Type attendu** : `planning & organizing`
 - **Priorité** : apps offrant des briques proches d'un planning (collaboration, POIs, hors-ligne, checklist, budget, etc.)
 - **Hors périmètre** : les apps comparable à des **plateformes de recommandations** ou des **hubs de réservation** sans composante d’itinéraire sont écartés de la veille
