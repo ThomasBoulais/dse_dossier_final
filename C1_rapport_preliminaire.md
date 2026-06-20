@@ -4,7 +4,7 @@
 
 Le projet est la **création d’une application web** qui permet de proposer à l’utilisateur **un itinéraire de voyage optimisé** à partir de contraintes renseignées comme la durée ou l’endroit désiré.
 
-L’objectif de ce document est d’avoir un **premier contact avec le sujet** au travers des sources de données à notre disposition. Une fois analysées, l’émergence des **lacunes actuelles** devrait permettre de définir la ou les **problématiques métiers** auxquels la mise en place d’une **plateforme de données** est une solution adéquate. Après une brêve synthèse des parties précédentes, nous concluerons sous forme d'ouverture en direction des **opportunités Produit** potentielles pour l’application à développer.
+L’objectif de ce document est d’avoir un **premier contact avec le sujet** au travers des sources de données à notre disposition. Une fois analysées, l’émergence des **lacunes actuelles** devrait permettre de définir la ou les **problématiques métiers** auxquelles la mise en place d’une **plateforme de données** est une solution adéquate. Après une brêve synthèse des parties précédentes, nous concluerons sous forme d'ouverture en direction des **opportunités Produit** potentielles pour l’application à développer.
 
 ## Lexique
 - **POI(s)** : Points d’intérêt (*Point Of Interest*)
