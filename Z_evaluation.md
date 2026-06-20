@@ -3,10 +3,10 @@
 Dans le cadre d’un projet sur la base d’un dossier documentaire, le candidat devra identifier les besoins en architecture, élaborer un système de veille en lien avec le projet, formaliser son périmètre et émettre des recommandations d’architecture.  
 
 **Livrable écrit :**
-- Rapport préliminaire (C1)
-- Système de veille, rapport d’analyse (C2, C3)
-- Cahier des charges (C4)
-- Rapport explicitant les recommandations (C5)
+- Rapport préliminaire (C1) ✅
+- Système de veille, rapport d’analyse (C2, C3) 👀
+- Cahier des charges (C4) 👀
+- Rapport explicitant les recommandations (C5) 👀
 
 ## C1 - Le candidat doit rédiger un rapport préliminaire intégrant :
 - L’analyse exploratoire des flux de données proposée. Elle permet d’identifier comment l’information se transmet et se transforme. Les données et leurs interactions sont schématisées  
@@ -46,19 +46,22 @@ Dans le cadre d’un projet sur la base d’un dossier documentaire, le candidat
 - Le candidat utilise un vocabulaire adapté à son interlocuteur.
 - La prise de parole en public est fluide
 
+<br>
 
 ---
+---
 
+<br>
 
 ## E4 Mise en situation professionnelle (C19, C20, C22, C23, C24): 
 Sur la base d’un projet d’architecture de données, le candidat devra définir la structure organisationnelle du projet. Le candidat coordonnera ses actions avec les autres membres de son équipe en vue de définir les modalités d’organisation.  
 
 Le candidat devra soumettre les éléments suivants : 
 **Livrable écrit :** 
-- Un rapport détaillant les modalités de mise en œuvre et d’optimisation du projet (C19, C20, C23)
-- Un plan d’accompagnement (C24)  
+- Un rapport détaillant les modalités de mise en œuvre et d’optimisation du projet (C19, C20, C23) 👀
+- Un plan d’accompagnement (C24) 👀
 
-**Présentation orale** dudit projet via la simulation d’un reporting, et auprès de sa hiérarchie (C20, C22, C24)  
+**Présentation orale** dudit projet via la simulation d’un reporting, et auprès de sa hiérarchie (C20, C22, C24) 👀
 
 ## C19 - Le candidat doit fournir un rapport détaillant le plan de projet :
 - Les différentes étapes sont décrites, listées, priorisées, et leurs durées estimées

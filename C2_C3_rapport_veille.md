@@ -1,5 +1,8 @@
 # Rapport de veille - Itinéraire de voyage
 
+*Rédaction : Thomas BOULAIS*  
+*Veille réalisée le 22/12/2025*  
+
 ## 1. Contexte et objectif de la veille
 Le projet vise à concevoir un système de **génération d’itinéraires de voyage optimisés** sous contraintes, *par exemple temporelles, préférences, faisabilité, arbitrage en cas d’imprévu* en intégrant les exigences **RGPD**, **RGAA** et **RSE** (écologie + inclusion handicap).  
 
@@ -40,8 +43,6 @@ Pour chaque application retenue, la vérification porte sur :
 - la présence de fonctionnalités annoncées (*ex. collaboration, hors-ligne, budget, POIs*),
 - et surtout l’existence (ou non) d’un **moteur d’optimisation** multi-critère et d’une **aide à l’arbitrage**.
 
-**La date de consultation des sites est le 2 février 2026.**
-
 ## 3. Sources retenues et traitement
 Les sources suivantes ont été retenues pour la veille (issues du comparatif initial, puis triées selon le scope).
 
@@ -51,8 +52,9 @@ Les sources suivantes ont été retenues pour la veille (issues du comparatif in
 | WanderLog | planning & organizing | https://wanderlog.com/fr | - collaboration <br>- optimisation d'itinéraire selon les points placés<br>- assistant IA<br>- accès hors ligne<br>- bugétisation<br>- possibilité de réservation (vol/voiture/hébergement)<br>- checklist / inventaire<br>- guide de voyage<br>- mode plan<br>- mutualisation de toutes les fonctions nécessaires | - mis à part l'agent AI, **pas de proposition d'itinéraire automatique**<br>- pas de moteur d'optimisation multicritère (horaire, fatigue, optionnel/obligatoire)<br>- pas d'option B en cas d'imprévu<br>- pas d'aide à l'arbitrage | 
 | Stippl | planning & organizing | https://www.stippl.io | - collaboration<br>- mutualisation de toutes les fonctions nécessaires<br>- gestion des documents de réservation<br>- assistant AI<br>- possibilité de prendre abonnement eSim<br>- checklist / inventaire<br>- interface planner chouette<br>- gestion budget (type tricount + catégorisation dépenses) | - mis à part l'agent AI, **pas de proposition d'itinéraire automatique**<br>- pas de moteur d'optimisation multicritère (horaire, fatigue, optionnel/obligatoire)<br>- pas d'option B en cas d'imprévu<br>- pas d'aide à l'arbitrage |
 | Komoot | planning & organizing | https://www.komoot.com/fr-fr/smarttour/e1035107064/le-pont-d-arc-boucle-dans-la-reserve-naturelle-des-gorges-de-l-ardeche | - compatibilité avec des appareils & services<br>- ajout de POIs on the flow + recalcul auto de la position<br>- indique des infos liées à la route (distance, temps estimé, déniv +/-, difficulté, profil de l'élévation)<br>- possibilité de partager/récupérer un itinéraire depuis POIs<br>- description POIs + lien vers les sources | - plutôt pensé pour un format de randonnée<br>- **pas de proposition d'itinéraire automatique**, l'itinéraire doit être créé manuellement et/ou récupéré d'un autre itinéraire déjà présent |
-| RoadTrippers | planning & organizing | https://roadtrippers.com | - | - |
-| Tripomatic | planning & organizing | https://maps.tripomatic.com/?utm_source=tripomatic_web&utm_medium=cta&utm_campaign=homepage#/ | - | - |
+| RoadTrippers | planning & organizing | https://roadtrippers.com | - UX très clair pour la génération d'itinéraire : *funnel point de départ/arrivée > dates > nb de voyageurs > budget bouffe/dodo/POI > type de stops intéressants > stops incontournables > génération* | - disponible uniquement aux USA <br>- l'itinéraire prend en charge uniquement les trajets en voiture  <br>- le passage au modèle premium après génération d'itinéraire empêche l'accès aux fonctionnalités <br>- impossible de savoir si le moteur d'optimisation est multi-critère, si des options de secours sont proposées, s'il existe de l'aide pour l'arbitrage |
+| Tripomatic | planning & organizing | https://maps.tripomatic.com/?utm_source=tripomatic_web&utm_medium=cta&utm_campaign=homepage#/ | - interface interactive claire (planification de nouveaux voyages soi-même ou avec l'aide d'un LLM, retour sur d'autres voyages organisés, moteur de recherche de logements avec filtres) | - mis à part l'agent AI, **pas de proposition d'itinéraire automatique**<br>- impossibilité de générer un itinéraire sans créer de compte  |
+
 
 ### 3.2 Tri : extraction par thèmes
 La veille permet de structurer les résultats en 4 axes directement reliés au projet :
@@ -74,7 +76,7 @@ Les apps étudiées couvrent bien la **logistique** du voyage, que ce soit l'org
 ### 4.2 Manques/écarts majeurs vis-à-vis du projet
 
 L'boservation des applications de la veille posent les limites suivantes  :
-- **Pas de proposition d’itinéraire automatique** sur *WanderLog* ou *Stippl*, et l'itinéraire est plutôt manuel ou récupéré sur *Komoot* plutôt manuel/récupéré
+- **Proposition d’itinéraire automatique** uniquement présent sur *RoadTrippers*, la majorité intègre un LLM pour suggestion d'idées, et l'itinéraire est à créer manuellement ou récupéré sur *Komoot*
 - **Pas de moteur d’optimisation multi-critère** explicite et contrôlable
 - **Absence d’option B** systématique en cas d’imprévu
 - **Peu/pas d’aide à l’arbitrage**, l’utilisateur n’est pas guidé dans le choix entre contraintes
