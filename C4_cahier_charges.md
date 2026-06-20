@@ -2,39 +2,6 @@
 
 *Rédaction : Thomas BOULAIS*
 
-## Plan du cahier des charges
-
-1. **Phase Discovery**  
-*phase de recherche et découverte des besoins à partir de framework de réflexions*  
-
-    1. **Récolte du besoin**  
-    *questionnaire auprès de futurs potentiels usagers*  
-
-    2. **Création des Personas**  
-    *à partir des résultats du questionnaire*  
-
-    3. **Synthèse Discovery**  
-    *idéation autour des problématiques*  
-
-    4. **Experience Map**  
-    *idéation du parcours utilisateur à partir des personas*
-
-2. **Périmètre du projet**  
-*à partir de l'ensemble des opportunités produit réfléchies plus tôt, on va sélectionner de quoi constituer le MVP pour la V1*  
-
-    1. **Liste de toutes les fonctionalités**  
-    *rappel des opportunités & solutions des synthèse Discovery & Experience Map*  
-
-    2. **Tri des priorités**  
-    *Méthode MoSCoW must-have / should-have / could-have / won't-have*  
-
-
-    3. **Définition du MVP**  
-    *prise de décision sur le périmètre du MVP*  
-
-
----
----
 
 # 1. Phase Discovery
 
@@ -117,16 +84,14 @@ La présence ou non des fonctionnalités sera basée sur plusieurs critères tel
 
 L'ensemble des fonctionnalités précédemment identifiées peuvent être regroupée par bloc.
 
-**⚠️ RELIRE A PARTIR D'ICI ⚠️**
-
  | Bloc fonctionnel | Fonctionnalités constituantes | Besoins couverts | KPIs clés | Dépendance Data Eng
  | :-- | :-- | :-- | :-- | :--
- | **Import & Gestion des POIs** | - Import multi-sources (Google Maps, TripAdvisor, GPX, CSV)<br>- Standardisation/normalisation des données POI<br>- Scoring & priorisation des POIs (étiquetage incontournable vs optionnel)<br>- Détection de contradictions (horaires, catégories) | 1, 5, 6 | % POIs via import vs saisie manuelle<br>% itinéraires sans conflits à J1 | Connecteurs + schéma POI standardisé<br>Pipeline d'ingestion OSM/Places<br>Moteur de détection d'incohérences
- | **Planification assistée** | - Assistant 1-clic (1er brouillon)<br>- Templates intelligents (1j, 2j, thème)<br>- Moteur d'optimisation multi-critères (rapide/éco/relax/panoramique)<br>- Indicateurs explicites (km, temps marche/transport, coûts, réalisme)<br>- Comparateur de scénarios<br>- Arbitrage visuel (trade-offs) | 1, 3, 6 | Temps pour 1er itinéraire réalisable<br>% utilisateurs adoptant la v2 optimisée<br>% recommandations avec justification lisible | Graphe de mobilité multi-modes<br>Solveur TSP + contraintes horaires<br>Moteur d'explanations
- | **Collaboration & Vue unifiée** | - Dashboard unifié (POI + budget + calendrier)<br>- Carte multi-couche (POIs, transports, météo, pistes)<br>- Collaboration temps réel (commentaires, @mentions, votes)<br>- Historique des modifications<br>- Mode groupe avec préférences partagées<br>- Gestion des droits & audit log | 5, 6 | Score de consensus (votes positifs/total)<br>% export réussi sans reformatage | Webhooks/exports<br>Stockage versionné<br>Journal d'événements
- | **Fiabilité & Validation des données** | - Agrégation multi-sources<br>- Validation croisée<br>- MEP d'un indice de fiabilité<br>- Mise à jour automatique et fréquente<br>- Détection de contradictions (horaires, transferts impossibles) | 2, 3 | % itinéraires générés sans conflits J1<br>Taux d'erreurs détectées | Pipeline temps réel<br>Schéma normalisé horaires/prix/durée<br>Moteur de détection d'incohérences
- | **Adaptabilité en temps réel** | - Recalcul dynamique (trafic, météo, horaires, fatigue)<br>- Proposition systématique d'alternatives<br>- Plan B automatique par étape<br>- Notifications intelligentes (alertes contextualisées)<br>- Mode hors-ligne<br>- Score de flexibilité de l'itinéraire<br>- Gestion spécialisée vélo/transports | 4, 1 | % réussite des recalculs acceptés/utiles<br>Temps gagné VS baseline<br>CSAT live | Ingestion quasi temps réel<br>Modèle d'état "nowcasting"<br>Moteur d'alerting & replanification incrémentale
- | **Apprentissage & Boucle post-voyage** | - Rapport post-voyage (kms, coûts, temps, coups de cœur)<br>- Collaborative filtering pour personnalisation<br>- Boucle d'apprentissage des préférences | 6 | NPS/CSAT post-voyage<br>Courbe d'apprentissage pour V+1 | Schéma de télémétrie<br>Feature store<br>Connecteur check-in/acceptation
+ | **Import & Gestion des POIs** | - Import multi-sources (Google Maps, TripAdvisor, GPX, CSV)<br>- Standardisation/normalisation des données POI<br>- Scoring & priorisation des POIs (étiquetage incontournable vs optionnel)<br>- Détection de contradictions (horaires, catégories) | 1, 5, 6 | - % POIs via import vs saisie manuelle<br>- % itinéraires sans conflits à J1 | - Connecteurs + schéma POI standardisé- <br>- Pipeline d'ingestion OSM/DT<br>- Moteur de détection d'incohérences
+ | **Planification assistée** | - 1ère version en 1 clic<br>- Templates intelligents (format 1j, 2j, thème)<br>- Moteur d'optimisation multi-critères (rapide/éco/relax/panoramique)<br>- Indicateurs explicites (km, temps marche/transport, coûts)<br>- Comparateur de scénarios<br>- Arbitrage visuel (trade-offs) | 1, 3, 6 | - Temps pour 1er itinéraire réalisable<br>- % utilisateurs adoptant la v2 optimisée<br>- % recommandations avec justification lisible | - Graphe de mobilité multi-modes<br>- Modèle Deep Learning entraîné <br>- Moteur d'explications des prises de décisions
+ | **Collaboration & Vue unifiée** | - Dashboard unifié (POIs + budget + calendrier)<br>- Carte multi-couche (POIs, transports, météo)<br>- Collaboration temps réel (commentaires, mentions, votes)<br>- Historique des modifications<br>- Mode groupe avec préférences partagées<br>- Gestion des droits & audit log | 5, 6 | - Score de consensus (votes positifs/total)<br>- % export réussi sans reformatage | - Webhooks/exports<br>- Stockage versionné<br>- Journal d'événements
+ | **Fiabilité & Validation des données** | - Agrégation multi-sources<br>- Validation croisée & Indice de fiabilité<br>- Mise à jour auto fréquente<br>- Détection de contradictions (horaires, transferts impossibles) | 2, 3 | - % itinéraires générés sans conflits J1<br>- Taux d'erreurs détectées | - Pipeline temps réel<br>- Schéma normalisé horaires/prix/durée<br>- Moteur de détection d'incohérences
+ | **Adaptabilité en temps réel** | - Recalcul dynamique (trafic, météo, horaires, fatigue)<br>- Proposition systématique d'alternatives (choix)<br>- Plan B automatique par étape (imprévu)<br>- Notifications intelligentes (alertes contextualisées)<br>- Mode hors-ligne<br>- Score de flexibilité de l'itinéraire<br>- Gestion spécialisée vélo/transports | 4, 1 | - % réussite des recalculs acceptés/utiles<br>- Temps gagné VS baseline<br>- CSAT live | - Ingestion quasi temps réel<br>- Modèle d'état "Nowcasting"<br>- Moteur d'alerte & replanification incrémentale
+ | **Apprentissage & Boucle post-voyage** | - Rapport post-voyage (kms, coûts, temps, coups de cœur)<br>- Filtre personnel & collaboratif pour customisation<br>- Boucle d'apprentissage des préférences | 6 | - NPS/CSAT post-voyage<br>- Courbe d'apprentissage pour V+1 | - Schéma de télémétrie<br>- Feature store
 
 Une analyse par bloc de chacune des fonctionnalités constituantes nous permettra d'avoir un regard exhaustif concernant l'**Impact**, l'**Effort** et les éventuels **Blocages technologiques**.
 
@@ -134,89 +99,96 @@ Une analyse par bloc de chacune des fonctionnalités constituantes nous permettr
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Connecteurs import (Google Maps, GPX, CSV) | 5 | 3 | Oui : Nécessite reverse-engineering des APIs ou web-scraping fiable pour les sources fermées | Sans ça, les utilisateurs saisissent manuellement → aucune adoption. Effort modéré mais dépend des partenariats (Google Maps API, TripAdvisor)
- | Standardisation/normalisation des données POI | 5 | 4 | Oui : Dépend directement de la qualité des sources et de la couverture des champs (horaires, prix, durée, catégories) | C'est la fondation. Mal fait = tout le reste du produit génère des déchets. Effort élevé = ETL + data cleaning + schéma versionné
- | Scoring & priorisation des POIs | 4 | 2 | Non | Relativement simple une fois que les POIs sont standardisés. Formule de scoring personnalisable mais basique suffit pour MVP. Impact fort car c'est l'interface entre la donnée brute et la décision utilisateur
- | Détection de contradictions | 3 | 3 | Oui : Requires rules engine + savoir ce qui sont les "contradictions" valides par domaine | Important pour la fiabilité (cf Besoin 2) mais pas critique au lancement. Les contradictions ne sont détectées que si vos données sont bonnes → dépendance sur standardisation
+ | **Connecteurs import (Google Maps, GPX, CSV)** | 3 | 3 | Oui : Nécessite de reverse-engineer les APIs disponibles, ou de web-scrap pour les sources fermées | Utile pour rajouter de nouveaux POIs personnels. Effort modéré mais dépend des partenariats (Google Maps API, TripAdvisor)
+ | **Standardisation/normalisation des données POI** | 5 | 4 | Oui : Dépend directement de la qualité des sources et de la couverture des champs (horaires, prix, durée, catégories) | **Essentiel, c'est la fondation de l'app**. Si mal fait, tout le reste du produit génère des déchets. Effort élevé : ETL + data cleaning + schéma versionné
+ | **Scoring & priorisation des POIs** | 4 | 2 | Non | Relativement simple une fois que les POIs sont standardisés. Une formule de score personnalisable mais basique suffit pour le MVP. Impact conséquent car c'est l'interface entre la donnée brute et la décision utilisateur
+ | **Détection de contradictions** | 3 | 3 | Non | Important pour la fiabilité (cf. Besoin 2) mais pas critique au lancement. Les contradictions ne peuvent être  détectées que si les données sont bonnes ET standardisées (cf. fonctionnalité au-dessus)
 
-**Synthèse Bloc 1** : 2 bloqueurs technologiques (connecteurs + standardisation). Ces deux fonctionnalités doivent être faites en premier, même partiellement. Ne pas les faire bien = MVP mort-né.
+**Synthèse Bloc 1** : 2 bloqueurs technologiques, au niveau des connecteurs et de la standardisation. La standardisation est impérative et doit être réalisée en premier.
 
 ### 2.1.2. Bloc 2 : Planification assistée
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Assistant 1-clic (1er brouillon) | 5 | 4 | Oui : Dépend d'un solveur TSP opérationnel (même basique) + graphe de mobilité | C'est la "killer feature" promesse du produit. Mais ça repose sur le bloc 1 (POIs fiables) ET sur un moteur d'optimisation fonctionnel. Effort = implémentation solveur + heuristiques
- | Templates intelligents | 3 | 2 | Non | Nice-to-have. Simple à faire (quelques JSON + presets). Impact moyen = accélère les utilisateurs non-techno mais n'est pas fondamental. Peut être V1.1
- | Moteur multi-critères (rapide/éco/relax/panoramique) | 5 | 5 | Oui : Requires solveur multi-objectifs (complexité P-NP), matrice de coûts fiable (temps, distance, coûts), graphe de mobilité | C'est le cœur du produit. Très coûteux (recherche + optimisation). Peut être simplifié en V1 (ex: 2 modes au lieu de 4) mais doit être là
- | Indicateurs explicites (km, temps, coûts, réalisme) | 4 | 2 | Non | Facile si le solveur calcule ça. Impact fort = crée la confiance utilisateur dans les recommandations. Dépend du bloc 1 (données fiables)
- | Comparateur de scénarios | 3 | 2 | Non | UI/UX sur les résultats du solveur. Simple mais dépend que le solveur fasse plusieurs scénarios. Impact moyen = "nice" pour décideurs indécis
- | Arbitrage visuel (trade-offs) | 3 | 3 | Non | Dataviz + UI interactive. Modérément complexe, impact moyen = aide à la prise de décision mais pas critique si les indicateurs sont lisibles
+ | **1ère version en 1 clic** | 5 | 4 | Oui : Dépend d'un modèle Deep Learning opérationnel (même basique) + graphe de mobilité | **C'est la promesse du produit**, qui repose sur le bloc 1 ET sur un moteur d'optimisation fonctionnel. Effort conséquent : implémentation & entraînement d'un modèle sur problème de type TSP
+ | **Templates intelligents** | 3 | 2 | Non | Nice-to-have. Simple à faire (quelques JSON avec des itinéraires tout-faits). Impact moyen :  accélère les utilisateurs non-techno mais pas fondamental
+ | **Moteur multi-critères (rapide/éco/relax/panoramique)** | 5 | 5 | Oui : Nécessite un modèle multi-critères avec matrice de coûts fiable (temps, distance, coûts) et graphe de mobilité | **C'est le cœur du produit**. Effort très coûteux avec recherche/entraînement/optimisation. Une V1 simplifiée pourra être envisagée
+ | **Indicateurs explicites (km, temps, coûts, réalisme)** | 4 | 2 | Non | Facile si considéré dans le modèle entraîné. Impact fort : crée de la confiance dans les recommandations. Dépend du bloc 1 (données fiables)
+ | Comparateur de scénarios | 4 | 2 | Non | UI/UX sur les résultats du modèle. Peut-être simple mais implique que le modèle fasse plusieurs scénarios. Impact moyen/fort : fonctionnalité attendue pour persona explorateur
+ | **Arbitrage visuel (trade-offs)** | 3 | 3 | Non | Dataviz + UI interactive. Modérément complexe côté front, impact moyen : aide à la prise de décision mais pas critique si les indicateurs sont lisibles
 
-**Synthèse Bloc 2** : 2 gros bloqueurs (assistant 1-clic + moteur multi-critères). Le solveur est la dépendance centrale. Conseil : démarrer avec un solveur simplifié en V1 (ex: TSP classique sans vraiment optimiser sur 4 critères) puis enrichir.
+**Synthèse Bloc 2** : 2 gros bloqueurs, la 1ère version en 1 clic et le moteur multi-critères. Le modèle est la dépendance centrale. On démarrera avec une version simplifiée du modèle.
 
 ### 2.1.3. Bloc 3 : Collaboration & Vue unifiée
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Dashboard unifié (POI + budget + calendrier) | 4 | 3 | Non | Dépend que vous ayez les données POIs + calculs de budget/temps (bloc 1+2). UI/UX complexe mais no blocker tech. Impact fort = c'est comment les utilisateurs voient le trip
- | Carte multi-couche | 3 | 4 | Oui : Requires APIs cartographie (Mapbox, Google Maps) + intégration météo/trafic temps réel | Très coûteux techniquement (multi-source, perf). Impact moyen = "beau" mais pas critique pour fonctionner. Peut être dégradé à une seule couche en V1
- | Collaboration temps réel (commentaires, @mentions, votes) | 4 | 4 | Oui : Requires WebSocket / real-time DB (Firebase, Postgres avec subscriptions) + gestion des conflits de concurrence | Impact fort = proposition de valeur clé pour les groupes. Mais coûteux en infra et bugs de sync. Peut être dégradé à "refresh manuel" en V1
- | Historique des modifications | 2 | 2 | Non | Facile si vous versionnez vos données (audit log). Impact faible mais "must have" légalement/pour UX (undo).
- | Mode groupe avec préférences partagées | 3 | 2 | Non | Logique métier simple (shared settings). Dépend que votre modèle de données supporte les groupes.
- | Gestion des droits & audit log | 2 | 2 | Non | Standard (RBAC basique). Facile mais souvent oublié, important pour la fiabilité de la collaboration
+ | **Dashboard unifié (POI + budget + calendrier)** | 4 | 3 | Non | Dépend des données POIs et des calculs de budget/temps (bloc 1+2). UI/UX complexe mais pas de blocage techno. Impact fort : c'est comment les utilisateurs perçoivent le voyage
+ | **Carte multi-couche** | 3 | 4 | Oui : Nécessite des APIs de cartographie (Mapbox, Google Maps) + Intégration météo/trafic en temps réel | Très coûteux techniquement (multi-source, perf). Impact moyen : "beau" ou "cool" mais pas critique pour fonctionner
+ | **Collaboration temps réel (commentaires, mentions, votes)** | 4 | 4 | Oui : Nécessite WebSocket & BDD en temps réel (Firebase, Postgres avec abonnement) + gestion des conflits de concurrence | Impact fort = proposition de valeur clef pour les groupes. Mais coûteux en infra et bugs de sync. Peut être dégradé à "refresh manuel" en V1
+ | **Historique des modifications** | 2 | 2 | Non | Facile si versionnement des données (audit log). Impact faible mais "Must-have" légale et UX (Ctrl+Z)
+ | **Mode groupe avec préférences partagées** | 3 | 2 | Non | Logique métier simple de paramètres partagés. Dépend de la capacité du modèle à supporter l'organisation des contraintes groupes
+ | **Gestion des droits & audit log** | 2 | 2 | Non | Standard (RBAC basique). Facile mais souvent oublié et non-critique, important pour la fiabilité de la collaboration
 
-**Synthèse Bloc 3** : 2 bloqueurs (maps multi-couche + collab temps réel), tous deux coûteux. Stratégie V1 : dashboard + mode groupe basique, collaboration en "refresh manuel" (pas WebSocket), une seule couche de carte.
+**Synthèse Bloc 3** : 2 bloqueurs, la carte multi-couche et la collab temps réel, tous deux coûteux. Une stratégie pour la V1 serait de démarrer avec un dashboard + mode groupe basique, une possibilité de collaboration en "refresh manuel" (pas besoin de WebSocket), et une seule couche de carte.
 
 ### 2.1.4. Bloc 4 : Fiabilité & Validation des données
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Agrégation multi-sources | 4 | 3 | Oui : Dépend que vous ayez plusieurs sources connectées (bloc 1) + règles de fusion de données | Impact fort = c'est comment vous montez en fiabilité. Mais ça suppose déjà que vous avez 2+ sources. Peut être monophage en V1
- | Validation croisée | 3 | 3 | Oui : Requires heuristiques/règles métier pour détecter les contradictions (ex: si 3 sources disent 10€ et 1 dit 100€, laquelle croire ?) | Modérément coûteux. Impact moyen = améliore la confiance mais n'est pas critique si une seule source
- | Indice de fiabilité | 3 | 2 | Non | Facile si vous agrégez les sources (simple formule). Impact moyen = donne de la transparence à l'utilisateur
- | Mise à jour automatique et fréquente | 2 | 2 | Oui : Requires infrastructure d'ingestion temps réel (webhooks, scheduled jobs) | Impact faible en V1. Peut être batch quotidien au lieu de temps réel. Mais dépend de votre infra
- | Détection de contradictions (horaires, transferts impossibles) | 4 | 3 | Oui : Requires rules engine + vérification logique (ex: "transfert bus-musée en 5 min" dans quartier X ?) | Impact fort = évite les itinéraires non-réalisables. Coûteux mais critique pour la crédibilité du produit
+ | **Agrégation multi-sources** | 4 | 3 | Oui : Nécessite d'avoir plusieurs sources connectées (bloc 1) + règles de fusion de données | Impact fort : c'est de cette manière que la donnée gagne en fiabilité, en supposant une base multi-sources
+ | **Validation croisée** | 3 | 3 | Oui : Nécessite des règles métier pour détecter les contradictions et 3+ sources pour éviter les égalités | Modérément coûteux. Impact moyen : améliore la confiance mais n'est pas critique si on démarrer avec moins de sources
+ | **Indice de fiabilité** | 3 | 2 | Non | Facile si agrégation de sources. Impact moyen : donne de la transparence à l'utilisateur
+ | **Mise à jour auto fréquente** | 2 | 2 | Oui : Nécessite une infrastructure d'ingestion en temps réel (webhooks ou scheduled jobs) | Impact faible en V1. Un batch quotidien peut suffire au lieu de temps réel. Dépend de l'infra
+ | **Détection de contradictions (horaires, transferts impossibles)** | 4 | 4 | Oui : Nécessite l'explicabilité du modèle + vérification logique (ex: "transfert bus-musée en 5 min" dans quartier X ?) | Impact fort : évite les itinéraires non-réalisables. Coûteux mais critique pour la crédibilité du produit
 
-**Synthèse Bloc 4** : 3 bloqueurs légers (agrégation + validation + détection). Tous dépendent d'avoir des données de bonne qualité. Stratégie V1 : monosource + détection basique des horaires impossibles, pas de validation croisée.
+**Synthèse Bloc 4** : 3 bloqueurs légers, entre l'agrégation, la validation et la détection. Tous dépendent de la qualité des données. Pour le MVP, on pourra rester sur une détection basique des horaires impossibles sans passer par une validation croisée.
 
 ### 2.1.5. Bloc 5 : Adaptabilité en temps réel
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Recalcul dynamique (trafic, météo, horaires, fatigue) | 4 | 5 | Oui : Requires ingestion temps réel + modèle "nowcasting" + moteur de replanification incrémentale. Triple combo complexe | Impact fort pendant le voyage mais MVP peut survivre sans. Très coûteux = À DÉGAGER du V1
- | Proposition d'alternatives | 3 | 3 | Non | UI pour montrer les Plan B. Simple si le solveur les calcule. Dépend du bloc 2 (solveur).
- | Plan B automatique par étape | 3 | 3 | Oui : Requires stocker N itinéraires vs juste 1, + logique de "basculement intelligente" | Modérément coûteux. Impact moyen = utile mais pas critique si l'utilisateur peut resigner manuellement
- | Notifications intelligentes | 2 | 4 | Oui : Requires websocket + règles push (ex: "musée ferme 45 min") + traitement temps réel | Impact faible en V1. Très coûteux. À DÉGAGER du V1
- | Mode hors-ligne | 2 | 4 | Oui : Requires gestion de cache, sync incrémentale, résolution des conflits après reconnexion | Impact faible (niche = pauvres connexions). Très coûteux. À DÉGAGER du V1
- | Score de flexibilité | 2 | 2 | Non | Simple métrique si vous gardez trace des alternatives/plan B. Impact faible = curiosity feature
- | Gestion spécialisée vélo/transports | 3 | 3 | Oui : Requires APIs spécialisées (routage vélo distinct, GTFS pour transports) + graphe dédié | Impact moyen = couvert par certains personas. Dépend de la disponibilité des APIs. Peut être V1.1
+ | **Recalcul dynamique (trafic, météo, horaires, fatigue)** | 4 | 5 | Oui : Nécessite une ingestion temps réel + un modèle "Nowcasting" + un moteur de replanification incrémentale | Triple combo hautement complexe. Impact fort pendant le voyage mais le MVP peut survivre sans. Vu le coût, à sortir de la V1
+ | **Proposition d'alternatives** | 3 | 3 | Non | UI pour montrer les Plan B. Simple si le moteur les calcule. Dépend du bloc 2 (modèle).
+ | **Plan B automatique par étape** | 3 | 3 | Oui : Nécessite de  stocker N itinéraires vs un unique, en rajoutant la logique de "basculement intelligente" | Modérément coûteux. Impact moyen : utile mais pas critique si l'utilisateur peut modifier l'itinéraire manuellement
+ | **Notifications intelligentes** | 2 | 4 | Oui : Nécessite websocket + règles de push (ex: "Le musée ferme dans 45 min") + traitement en temps réel | Impact faible en V1, mais très coûteux. A sortir de la V1
+ | **Mode hors-ligne** | 2 | 4 | Oui : Nécessite la  gestion du cache, la synchro incrémentale, et la résolution des conflits après reconnexion | Impact faible assez niche et très coûteux. A sortir de la V1
+ | **Score de flexibilité** | 2 | 2 | Non | Simple métrique pour garder la trace des alternatives/plan B. Impact faible ; "curiosity feature"
+ | **Gestion spécialisée vélo/transports** | 3 | 3 | Oui : Nécessite des APIs spécialisées (routage vélo distinct, GTFS pour transports) + graphe dédié | Impact moyen : le besoin existe et a été exprimé. Dépend de la disponibilité des APIs. A voir en V1.1
 
-**Synthèse Bloc 5** : DANGER : ce bloc est une graveyard de bonnes idées trop coûteuses. À laisser largement de côté en V1. Garder : proposition d'alternatives (basique) + score flexibilité. Dégager : recalcul dynamique, notifications, hors-ligne.
+**Synthèse Bloc 5** : Ce bloc est un bourbier de bonnes idées très coûteuses qui n'ont pas leur place dans la V1. Parmi l'ensemble on peut ne garder que la proposition d'alternative sur un format basique.
 
 ### 2.1.6. Bloc 6 : Apprentissage & Boucle post-voyage
 
  | Fonctionnalité | Impact | Effort | Blocage technologique | Justification
  | :-- | :-- | :-- | :-- | :--
- | Rapport post-voyage | 2 | 2 | Non | Simple agrégation des metrics du voyage. Impact faible = nice-to-have pour nostalgie. Peut être V1.1
- | Collaborative filtering | 2 | 5 | Oui : Requires machine learning infra (feature store, pipeline d'apprentissage) | Impact moyen long-terme (améliore les reco au voyage suivant) mais très coûteux. À DÉGAGER du V1
- | Boucle d'apprentissage des préférences | 2 | 4 | Oui : Requires télémétrie fine (check-in, acceptation des suggestions) + feedback loop | Impact moyen. Coûteux. À DÉGAGER du V1
+ | **Rapport post-voyage** | 2 | 2 | Non | Simple agrégation des métriques du voyage. Impact faible = Nice-to-have pour jouer sur la nostalgie et les sentiments. A sa place dans la V1.1
+ | **Collaborative filtering** | 2 | 5 | Oui : Nécessite d'avoir une infra de Machine Learning infra avec la Feature store et le pipeline d'apprentissage | Impact moyen long-terme : améliore les reco au voyage suivant, mais très coûteux. N'a pas sa place dans la V1
+ | **Boucle d'apprentissage des préférences** | 2 | 4 | Oui : Nécessite une télémétrie fine (check-in, acceptation des suggestions) + une boucle de retour | Impact moyen pour un coût élevé. A sortir de la V1
 
-**Synthèse Bloc 6** : ML/apprentissage = trop coûteux pour V1. Garder seulement le rapport (cosmétique) et des hooks télémétrie basiques pour préparer l'ML de V2.
+**Synthèse Bloc 6** : L'utilisation de ML/apprentissage pour améliorer les recommandation est trop coûteux pour la V1. On peut se cantoner à garder le rapport (cosmétique) et éventuellement des hooks télémétrie basiques en vue de préparer l'arrivée du ML dans la V2.
 
-## 2.2. Synthèse globale : Matrice arbitrage MVP
+## 2.2. Synthèse globale : Matrice d'arbitrage pour le MVP
+
+En suivant la méthode **MoSCoW** (***MUST-HAVE, SHOULD-HAVE, COULD-HAVE, WON'T-HAVE***), voici le résultat de l'arbitrage : 
 
  | Priorité | Fonctionnalités | Impact | Effort | Blocage technologique | Recommendation
  | :-- | :-- | :-- | :-- | :-- | :--
- | MUST (V1 critique) | Connecteurs import | 5 | 3 | Oui | À faire en premier — sans ça, pas d'adoption
- |  | Standardisation POI | 5 | 4 | Oui | À faire en premier — fondation de tout
- |  | Assistant 1-clic (simplifié) | 5 | 4 | Oui | À faire — promise du produit, mais version lite (1 mode, pas 4)
- |  | Moteur multi-critères (basique) | 5 | 5 | Oui | À faire en v1 — coeur du produit, mais limiter à 2-3 modes max, pas 4
- |  | Dashboard unifié | 4 | 3 | Non | À faire — c'est comment les gens visualisent. No-brainer
- |  | Scoring & priorisation POI | 4 | 2 | Non | À faire — facile, valeur forte
- |  | Indicateurs explicites | 4 | 2 | Non | À faire — crée la confiance, trivial si solveur OK
- | SHOULD (V1 intéressant) | Détection de contradictions | 4 | 3 | Oui	À inclure si temps — important pour crédibilité. Effort modéré.
- |  | Mode groupe + préférences partagées | 3 | 2 | Non | À inclure — facile, améliore UX groupe
- |  | Historique des modifications | 2 | 2 | Non | À inclure — facile, legal+UX
- |  | Gestion droits & audit log | 2 | 2 | Non | À inclure — standard, facile
- |  | Gestion spécialisée vélo/transports | 3 | 3 | Oui | À considérer — impact moyen, coûteux, dépend APIs dispo. Peut être V1.1
- | COULD (V1 optionnel) | Comparateur scénarios | 3 | 2
+ | MUST-HAVE | Standardisation POI | 5 | 4 | Oui | Fondation de tout, à réaliser en premier
+ |  | Moteur multi-critères (basique) | 5 | 5 | Oui | Coeur du produit, à réaliser mais en version "lite" (1 seul mode pour démarrer)
+  |  | 1ère version en 1 clic | 5 | 4 | Oui | Promesse du produit, à réaliser une fois le moteur multi-critère implémenté
+ |  | Dashboard unifié | 4 | 3 | Non | Comment les gens visualisent le périple en dehors de la carte. Nécessaire
+ |  | Scoring & priorisation POI | 4 | 2 | Non | Facile à mettre en place, valeur forte
+ |  | Indicateurs explicites | 4 | 2 | Non | Crée de la clarté et de la confiance auprès des utilisateurs
+ | SHOULD-HAVE | Détection de contradictions | 4 | 3 | Oui | Important pour la crédibilité. A inclure si on a le temps
+ |  | Mode groupe + préférences partagées | 3 | 2 | Non | Important pour un gain élevé en UX pour les groupes
+ |  | Historique des modifications | 2 | 2 | Non | Important pour le caractère légal et l'UX
+ |  | Gestion droits & audit log | 2 | 2 | Non | Standard, relativement facile à réaliser
+ |  | Gestion spécialisée vélo/transports | 3 | 3 | Oui | À considérer.Impact moyen, coûteux, et dépend si des APIs sont dispo. A peut-être plus sa place en V1.1
+ | COULD-HAVE | Comparateur scénarios | 3 | 2
+ |  | Connecteurs import | 5 | 3 | Oui | 
+ |  | (...)
+
+
+Les autres fonctionnalités n'ont pas leur place dans la V1, comme exposé dans les tableaux précédents. Et au vu de la constitution de l'équipe projet (1 personne) il est peu probable que toutes les fonctionnalités **SHOULD-HAVE** soient réalisées d'ici la fin du projet.
+

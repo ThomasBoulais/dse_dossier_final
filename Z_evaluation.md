@@ -4,8 +4,8 @@ Dans le cadre d’un projet sur la base d’un dossier documentaire, le candidat
 
 **Livrable écrit :**
 - Rapport préliminaire (C1) ✅
-- Système de veille, rapport d’analyse (C2, C3) 👀
-- Cahier des charges (C4) 👀
+- Système de veille, rapport d’analyse (C2, C3) ✅
+- Cahier des charges (C4) ✅
 - Rapport explicitant les recommandations (C5) 👀
 
 ## C1 - Le candidat doit rédiger un rapport préliminaire intégrant :
