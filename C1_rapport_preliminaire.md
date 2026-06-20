@@ -13,7 +13,7 @@ L’objectif de ce document est d’avoir un **premier contact avec le sujet** a
 - **RDB** : base de données relationnelles
 - **ODbL** : contrat de licence favorisant l’utilisation des données (Open Database Licence)
 
-## Analyse exploratoire des flux de données
+## 1. Analyse exploratoire des flux de données
 
 ### 1.1. Identifier les sources de départ
 
@@ -117,7 +117,7 @@ OSM : 	Source ➡️ Bronze ➡️ Silver ➡️ Gold
 
 Les étapes de transformation, de nettoyage, d'harmonisation et solutions présentées sont autant de frictions qu'un utilisateur doit traverser s'il souhaite produire un itinéraire se basant sur les informations métiers plus pointues de **DATAtourisme** avec les routes d'**OpenStreetMap**, ou avec les POIs des 2 sources.
 
-## Problématiques métier
+## 2. Problématiques métier
 ### 2.1. Constat
 
 L'analyse des sources de données montrent que chacune des sources enrichit l'autre : 
@@ -169,7 +169,7 @@ En observant les étapes de nettoyage et d'harmonisation à réaliser en vue d'u
 
 Ces réflexions sont d'autant de prérequis et contraintes à considérer lors de la création de l'architecture de données à destination de notre application web.
 
-## Synthèse de l’existant & Opportunité de développement
+## 3. Synthèse de l’existant & Opportunité de développement
 
 Dans le cas de la génération d'itinéraires optimisés de voyage avec de données touristiques qualitatives, les sources de données DATAtourisme et OpenStreetMap présentent chacune des avantages significatifs.  
 
