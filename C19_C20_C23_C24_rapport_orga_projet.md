@@ -7,7 +7,7 @@ Ce rapport détaille les modalités de mise en œuvre et d'optimisation du proje
 Le projet a été réalisé en contexte contraint : réduction progressive de l'équipe de 3 à 1 personne dès la phase discovery, impactant le périmètre couvert et la profondeur de certains sujets (validation exhaustive, déploiement complet). Ce rapport explicite cette situation et ses implications.
 
 
-## **2. PLAN DE PROJET (C19)**
+## **2. PLAN DE PROJET**
 
 ### **2.1 Phases et étapes du projet**
 
@@ -56,7 +56,7 @@ Le projet a été réalisé en contexte contraint : réduction progressive de l'
 - **RGAA/RSE** traités a minima dans le MVP (non mandatory pour cette phase).
 
 
-## **3. MODALITÉS DE MISE EN ŒUVRE (C20)**
+## **3. MODALITÉS DE MISE EN ŒUVRE**
 
 ### **3.1 Méthode agile et outils**
 
