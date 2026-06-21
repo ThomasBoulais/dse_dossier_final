@@ -1,84 +1,186 @@
-# Recommandations et axes de développement - Itinéraire de voyage
+## Executive Summary
 
-## 1) Problématique métier et attentes utilisateurs
-L’enjeu métier est de réduire le “coût cognitif” et le temps de planification, tout en améliorant la qualité du voyage : un itinéraire doit être **réaliste**, **cohérent** avec des **contraintes** (temps, rythmes, options/obligations, préférences), et suffisamment **robuste** pour gérer les imprévus (météo, fermeture, retards).  
-Les solutions existantes couvertes par la veille montrent surtout une forte valeur sur la **logistique** (organisation, collaboration, budget, documents, offline), mais moins sur la partie **optimisation multi-critère** et l’**arbitrage** (et donc l’adaptation / plan B).
+A partir de la Discovery 2 profils utilisateurs distincts ont émergé : la **Planificatrice pragmatique** et l'**Explorateur flexible**. Leurs besoins et attentes au niveau de l'application sont différents mais convergent techniquement vers un moteur unique capable de générer ET d'ajuster des itinéraires.
 
-## 2) Axes de développement recommandés (avec argumentaire)
+Le MVP recommandé **priorise 6 fonctionnalités MUST-HAVE** (fondées sur dépendances technologiques strictes) puis **5 SHOULD-HAVE** qui amplifient la valeur. Cette approche délivre un produit viable en **10-12 semaines** pour une petite équipe, sans dette technique.
 
-### Axe A — Moteur de génération d’itinéraires “multi-critère” orienté contraintes
-**Recommandation :** concevoir un moteur qui génère un itinéraire en tenant compte simultanément de plusieurs dimensions, par exemple :
-- horaire / plages de visite,
-- temps de trajet (et marges),
-- fatigue / rythmes (durées max par journée, temps de repos),
-- contraintes optionnelles vs obligatoires,
-- préférences (lieux, activités, styles de route/transport),
-- faisabilité (éviter les combinaisons impossibles ou trop serrées).
 
-**Argumentaire :**
-- C’est l’écart principal identifié par la veille : les apps analysées proposent davantage de planification assistée ou de recalcul simple, mais rarement un solveur robuste qui arbitre explicitement.
-- Multi-critère = meilleure adéquation à la réalité utilisateur (un seul “meilleur chemin” ne suffit pas).
+## 1. Les deux personas et leurs besoins
 
-### Axe B — Arbitrage explicite et justification des choix (aide à la décision)
-**Recommandation :**
-- afficher un “raisonnement utilisateur” : pourquoi cette option est choisie (ex. “préserve le respect du temps de visite”, “évite une marche trop longue”, “priorise les obligations”),
-- et proposer une lecture claire des compromis (ex. temps vs confort vs coût).
+| **Critère** | **Planificatrice pragmatique** | **Explorateur flexible** |
+|---|---|---|
+| **Profil** | 25-34 ans, petit groupe, tech-savvy, Excel + Maps | 25-45 ans, solo/duo, cherche expériences authentiques |
+| **Objectif principal** | Voir un max sans fatigue • Respecter budget/horaires • Trajets optimisés | Sortir des sentiers battus • Garder liberté sur place • Pas de rigidité imposée |
+| **Frustrations** | Imprévus • Infos incomplètes/obsolètes • Outils manuels non connectés | Itinéraires rigides • Lieux trop touristiques • Pas d'alternatives proposées |
+| **Attentes** | Optimisation auto + ajustement dynamique + visualisation compromis | Reco adaptées à leurs goûts + itinéraires "beaux" + scénarios alternatifs |
 
-**Argumentaire :**
-- L’aide à l’arbitrage devient un facteur différenciant : l’utilisateur n’a pas seulement un résultat, il comprend et peut ajuster.
-- Cela améliore l’acceptation du système : moins de “boîte noire”, plus de contrôle.
+### Insight clé
 
-### Axe C — Robustesse : option B et adaptation guidée en cas d’imprévu
-**Recommandation :**
-- intégrer un mécanisme de **plan B** : lorsqu’un événement invalide une partie du programme (retard, fermeture, météo), le système propose :
-  - une replanification “minimale” (préserver le maximum déjà acquis),
-  - une alternative justifiée (ce qui change et pourquoi),
-  - et un indicateur de risque (impact sur fatigue/temps/budget).
-- prévoir des scénarios d’imprévu dans le modèle de données (cause, périmètre impacté, degré d’urgence).
+**Les deux personas convergent vers une seule solution technique** : un moteur qui génère l'itinéraire optimal ET permet de l'ajuster/substituer sans le recalculer entièrement. La Planificatrice utilise la rigidité initiale pour gagner du temps ; l'Explorateur utilise la flexibilité post-génération pour garder sa liberté.
 
-**Argumentaire :**
-- La veille met en évidence une absence fréquente de plan B robuste.
-- La valeur métier est directe : moins d’échecs de planification et plus de satisfaction.
+## 2. Stratégie MVP : Hiérarchie fonctionnelle et dépendances
 
-### Axe D — “Trip package” : intégrer logistique + optimisation (end-to-end)
-**Recommandation :**
-conserver les briques fortes observées tout en les connectant à l’optimisation :
-- budget et catégories dépenses,
-- documents de réservation,
-- checklists/inventaires,
-- offline-first,
-- collaboration et partage du planning,
-- ajout de POIs et intégration “on the flow”.
+Les différentes étapes de réalisation sont forcées par les dépendances. La standardisation des POIs par exemple, est primordiale pour les autres actions et doit être réalisée en amont de celles-ci.
 
-**Argumentaire :**
-- Une génération d’itinéraires utile doit se traduire en exécution : réservations, suivi, contenus offline.
-- Le moteur d’optimisation devient la “cerise” au sommet d’une expérience voyage complète.
 
-### Axe E — Accessibilité et RSE dès la conception (qualité produit et conformité)
-**Recommandation :**
-- RGAA : formulaires et parcours accessibles, lecture claire des itinéraires, compatibilité technologies d’assistance.
-- RSE/écologie : réduire les replanifications inutiles, proposer des variantes cohérentes (modes/rythmes) pour limiter l’inefficacité.
-- Inclusion : permettre d’exprimer des contraintes de mobilité (ex. fatigue, accessibilité quand l’info existe) et proposer des alternatives adaptées.
+ | Durée | Action
+ | :-- | :--
+ | Semaines 1-3 | Standardisation des POIs, puis attribution d'un score d'attractivité
+ | Semaines 3-7 | Moteur multi-critères
+ | Semaines 4-6 | Dashboard unifié et Indicateurs explicites
+ | Semaines 6-7 | 1ère version d'itinéraire en 1 clic
+ | Semaines 5-8 | Détection contradictions + Mode groupe (si assez de temps)
 
-**Argumentaire :**
-- Ces exigences ne sont pas seulement “conformité” : elles améliorent la pertinence fonctionnelle pour des profils variés et donc la valeur utilisateur.
 
-## 3) Plan d’action (version pragmatique)
-1. **MVP optimisation** : générer un itinéraire multi-critère pour un périmètre limité (ex. 2–3 jours, nombre de POIs borné), avec :
-   - contraintes optionnel/obligatoire,
-   - explication simple des compromis,
-   - marges de faisabilité.
-2. **MVP arbitrage UI** : permettre des ajustements rapides (pondérations/contraintes) + affichage “pourquoi”.
-3. **Plan B v1** : replanification minimale sur un événement unique (retard ou fermeture d’un POI).
-4. **Connecteurs logistiques** : budget/documents/checklist offline ; intégration POIs.
-5. **Améliorations RSE/RGAA** : audit accessibilité + contraintes d’inclusion.
+## 3. Spécification MUST-HAVE (6 fonctionnalités)
 
-## 4) Synthèse des recommandations (message à retenir)
-- Priorité 1 : **génération d’itinéraires multi-critère** avec gestion réaliste des contraintes.
-- Priorité 2 : **arbitrage explicite** pour que l’utilisateur comprenne et ajuste.
-- Priorité 3 : **robustesse avec plan B** afin d’éviter la casse du voyage en cas d’imprévu.
-- En parallèle : s’appuyer sur les points forts de la veille (logistique, collaboration, offline, POIs, budget) pour assurer une expérience “end-to-end”.
-- Enfin : intégrer **RGAA** (accessibilité) et **RSE** (écologie + inclusion handicap) comme paramètres de conception.
+### M1 - Standardisation des POIs 
+*Semaines 1-3, Effort 4/5, Impact 5/5*
 
-## 5) Vocabulaire et prise de parole (script court, 45–60 secondes)
-“Notre veille montre que beaucoup d’applications aident surtout à organiser la logistique du voyage : collaboration, budget, documents, offline, et parfois le recalcul autour de POIs. La différenciation à construire, c’est la génération d’itinéraires réellement optimisés : un moteur multi-critère qui respecte des contraintes optionnelles et obligatoires, avec un arbitrage explicable pour éviter l’effet boîte noire. Ensuite, je recommande d’ajouter une robustesse avec plan B, pour adapter l’itinéraire en cas d’imprévu tout en minimisant l’impact sur ce qui a déjà été validé. Enfin, on connecte ce moteur au trip end-to-end et on garantit l’accessibilité RGAA et les enjeux RSE dès la conception : inclusion et réduction des replanifications inutiles.”
+**Spécification** : un schéma unique pour tous les POIs : le nom, les types & sous-type  (culture/nature/restauration/loisir), la durée visite (min), les coûts (€), les périodes et horaires d'ouverture, la localisation (lon/lat), les informations descriptives du POI.
+
+**Source V1** : APIs pour les 2 sources OSM & DATAtourisme. Validation basique : horaires valides, prix numérique, durée > 0.
+
+**KPI succès** : taux de colonnes remplies et normalisées (notamment pour la localisation, les types/sous-types et les horaires d'ouverture) > 95%
+
+**Impact personas** :
+- **Planificatrice** : avoir des données fiables est essentielle, permettant de pouvoir calculer les métriques comme le budget, le temps ou la distance
+- **Explorateur** : mettre en place un tag d'intérêt "authentique" permet de les valoriser via le score de chaque POI
+
+
+### M2 - Moteur multi-critères (basique - 1 mode) 
+
+*Semaines 3-7, Effort 5/5, Impact 5/5*  
+
+**Spécification** : le générateur d'itinéraire est optimisé sur **1 seul critère en V1 : "profit maximisé"** (cumul du score des POIs sous contrainte temporelle).
+
+- **Entrée** : la date et l'heure de départ, le nombre de jours de voyage et le point de départ
+- **Sortie** : l'ordre de visite optimal, l'heure arrivée/départ pour chaque POI • l'heure d'arrivée finale, la durée totale de transport
+- **Contraintes** : respecte les horaires d'ouverture des POIs, doit trouver une restauration sur les créneau de midi et du soir, doit trouver un logement en fin de journée
+- **Algo** : Modèle de Reinforcment Learning qui apprend de son environnement
+
+**Non considéré pour le MVP** : les pondérations personnalisables, les modes "Budget" / "Eco" / "Relax" / "Rapide". Ces modes seront définies dans la V1.1.
+
+**KPI succès** : génère itinéraire faisable (horaires respectés) > 95% cas, satisfaction moteur > 7/10
+
+**Impact personas** :
+- **Planificatrice** : passer en automatique l'optimisation réalisée manuellement à ce jour
+- **Explorateur** : légitimer le point de départ à partir duquel il sera possible de négocier les modifications
+
+
+### M3 - Dashboard unifié 
+
+*Semaines 4-6, Effort 3/5, Impact 4/5*
+
+**Spécification** : un écran central avec les POIs sélectionnés à gauche, la carte simple au centre, la timeline itinéraire à droite et les métriques en bas.
+
+- **Affichage** : la liste des POIs avec pour chacun leur score, coûts, heure arrivée/départ, la durée de la visite, la durée du transport, et le coût et la distance parcourure au total
+- **Interactivité** : un clic peut ajouter/retirer un POI, possibilité de glisser-déposer, réordonner, modifier le temps d'une visite
+- **Pas inclus en V1** : la collaboration temps réel, les différentes couches sur la carte, le recalcul dynamique
+
+**KPI succès** : les utilisateurs trouvent une info en moins de 10 secondes, et la satisfaction est supérieure à 8/10
+
+**Impact personas** :
+- **Planificatrice** : avoir une vue unifiée sur une seule app
+- **Explorateur** : voir le flow et identifier où il est possible d'effectuer des modifications
+
+
+### M4 - Scoring & Priorisation POI 
+
+*Semaines 2-3, Effort 2/5, Impact 4/5*
+
+**Spécification** : chaque POI reçoit un score de 1 à 5 étoiles. C'est une combinaison de la note utilisateur (1-5) si elle est renseignée + de la valeur de tag "authentique" (2x poids) vs "mainstream".
+
+**Formule simple** : (note_utilisateur + 2 × tag_authentique) / 3
+
+**Pas en V1** : les filtres collaboratifs, un système de rang basé sur la popularité
+
+**KPI succès** : 90% POI scorés, les utilisateurs disent que le "*score les aide à décider*"
+
+**Impact personas** :
+- **Planificatrice** : voir rapidement le ROI pour chaque POI (coût/temps VS intérêt)
+- **Explorateur** : découvrir des POIs moins touristiques grâce au tag "authentique"
+
+
+### M5 - Indicateurs explicites 
+
+*Semaines 5-6, Effort 2/5, Impact 4/5*
+
+**Spécification** : chaque itinéraire généré affiche :
+- **des Chiffres clés**, comme le total de POIs visité, de km parcourus, de durée de visite, de durée de transport, de coût estimé
+- **Indice de confiance** = 1 - (% POI données incomplètes). Par exemple, si 10% des POIs de l'itinéraire sont sans horaires, l'indice de confiance est à 90%
+- **Format** : 5 grands nombres visibles en dessous de la carte
+
+**Calcul** : Mis à part l'indice de confiance, les autres valeurs sont la somme des données standardisées
+
+**KPI succès** : les utilisateurs disent qu'ils ont confiance dans ces indicateurs, les valeurs calculées estimés vs réalité sont fiables à plus de 85%
+
+**Impact personas** :
+- **Planificatrice** : **besoin client clef**, avoir une visualisation explicite présentant les compromis
+- **Explorateur** : comprendre pourquoi cet itinéraire a été proposé pour décider de le modifier
+
+
+### M6 - 1ère version en 1 clic
+
+*Semaines 6-7, Effort 4/5, Impact 5/5*
+
+**Spécification** : un bouton "Générer itinéraire" qui prend les contraintes (nombre de jour, lieu de départ) et retourne un itinéraire prêt pour discussion
+
+- **UI** : 1 bouton + 1 bandeau avec les critères + 1 indicateur de chargement
+- **Pas de sélection de mode** : trop complexe pour la V1, on reste sur un mode unique de voyage pour le moment
+- **Output** : 1 itinéraire optimal unique, modifiable après coup et pouvant être relancé manuellement
+
+**KPI succès** : 80% utilisateurs réussissent à générer l'itinéraire sans aide,satisfaction UX supérieure à 7/10
+
+**Impact personas** :
+- **Planificatrice** : **gain clé**, gagner beaucoup de temps sur la préparation en amont (passage de 4-6h à 2 min pour un premier jet exploitable)
+- **Explorateur** : obtenir un point de départ pour discussions ("*bon qu'est-ce qu'on en pense ?*", "*ok là on change ça*")
+
+
+## 4. SHOULD-HAVE : Fonctionnalités complémentaires 
+
+Les fonctionnalités suivantes sont les SHOULD-HAVE identifiées précédemment, et sont à implémenter une fois les MUST-HAVE réalisées et s'il reste du temps disponible.
+
+| **Fonctionnalité** | **Effort** | **Impact** | **Recommandation** | **Condition** |
+|---|---|---|---|---|
+| **Détection contradictions** | 3 sem | Haute | **Forte valeur, à inclure** | Le moteur et la standardisation des POIs sont opérationnels |
+| **Mode groupe** | 2 sem | Haute | **Ouverture aux groupes, à inclure** | Le dashboard est opérationnel |
+| **Historique modifications** | 2 sem | Moyenne | Si possible, sinon V1.1 | Après le mode groupe |
+| **Gestion droits & audit** | 2 sem | Moyenne | Si possible, sinon V1.1 | Complément mode groupe |
+| **Gestion vélo/transports** | 3 sem | Moyenne | A passer dans la V1.1 | Dépend des APIs GTFS à notre dispo |
+
+## 5. Recommandations finales
+
+Les recommandations quant à la Road Map sont les suivantes :  
+
+| **Fonctionnalité** | **Raison** | **Quand** |
+|---|---|---|
+| Collaboration en temps réel (WebSocket) | Effort 4 sem  + coût infra élevé + delta UX faible VS raffraîchissement manuel | V1.1 |
+| Comparateur de scénarios | Effort 2 sem + UI complexe | V1.1 |
+| Carte multi-couches (météo/transport) | Effort 4 sem + coûts APIs | V2 |
+| Recalcul dynamique (trafic live) | Effort supérieur à 5 sem (gestion du trafic en live) + besoin niche (voyage en cours) | V2 |
+
+En terme de calendrier, la temporalité est la suivante : 
+- **Semaines 1-4** : Standardisation POI + Ajout d'un score basique
+- **Semaines 4-9** : Moteur multi-critères
+- **Semaines 5-8** : Dashboard & Indicateurs + 1ère version en 1 clic
+- **Semaines 9-12** : Tests beta + fix critiques, puis enfin lancement auprès d'un nombre d'utilisateurs restreints (entre 10 et 20 beta testeurs)
+
+### Points de pivots potentiels
+
+| **Point de pivot** | **Critère** | **Sinon** |
+|---|---|---|
+| **Pivot 1 (sem 9)** | Le moteur génère des itinéraires faisables > 95% | Revisiter le modèle jusqu'à obtention d'une précision suffisante |
+| **Pivot 2 (sem 12)** | Beta test CSAT > 7/10 | Ajuster UX avant lancement |
+| **Pivot 3 (sem 4 après lancement)** | NPS > 30 | Pivot vers fonctionalités X ou Y |
+
+
+## Conclusion
+
+Le produit résout un problème réel : réduire drastiquement le temps de planification pour la **Planificatrice**, et définir un cadre pour l'**Explorateur** qui lui permet de garder sa liberté tout en ayant point de départ crédible.  
+
+Le MVP concentre les ressources à dispo sur les **6 MUST-HAVE** fondés sur des dépendances technologiques strictes. Les **5 SHOULD-HAVE** amplifient la valeur s'il reste du temps à notre disposition.  
+
+Le **succès de l'application dépend de 2 blocages technologiques** : avoir des données POIs normalisées, et un modèle entraîné donnant des résultats fiables. Ces points cruciaux seront à adresser dans les premières semaines de développement.
+
+Une fois prêt au lancement, un passage en **beta communauté fermée** pour apprendre est préconisé avant de définir plus clairement la Road Map pour les versions suivantes.

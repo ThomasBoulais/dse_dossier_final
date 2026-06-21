@@ -190,5 +190,4 @@ En suivant la méthode **MoSCoW** (***MUST-HAVE, SHOULD-HAVE, COULD-HAVE, WON'T-
  |  | (...)
 
 
-Les autres fonctionnalités n'ont pas leur place dans la V1, comme exposé dans les tableaux précédents. Et au vu de la constitution de l'équipe projet (1 personne) il est peu probable que toutes les fonctionnalités **SHOULD-HAVE** soient réalisées d'ici la fin du projet.
-
+Les autres fonctionnalités n'ont pas leur place dans la V1, comme exposé dans les tableaux précédents. En raison de la taille réduite de l'équipe projet, les fonctionnalités COULD-HAVE et WON'T HAVE ne sont pas explicitées pour le MVP.
