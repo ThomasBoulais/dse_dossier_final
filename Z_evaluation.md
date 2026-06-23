@@ -6,7 +6,7 @@ Dans le cadre d’un projet sur la base d’un dossier documentaire, le candidat
 - Rapport préliminaire (C1) ✅
 - Système de veille, rapport d’analyse (C2, C3) ✅
 - Cahier des charges (C4) ✅
-- Rapport explicitant les recommandations (C5) 👀
+- Rapport explicitant les recommandations (C5) ✅
 
 ## C1 - Le candidat doit rédiger un rapport préliminaire intégrant :
 - L’analyse exploratoire des flux de données proposée. Elle permet d’identifier comment l’information se transmet et se transforme. Les données et leurs interactions sont schématisées  
@@ -58,7 +58,7 @@ Sur la base d’un projet d’architecture de données, le candidat devra défin
 
 Le candidat devra soumettre les éléments suivants : 
 **Livrable écrit :** 
-- Un rapport détaillant les modalités de mise en œuvre et d’optimisation du projet (C19, C20, C23) 👀
+- Un rapport détaillant les modalités de mise en œuvre et d’optimisation du projet (C19, C20, C23) ✅
 - Un plan d’accompagnement (C24) 👀
 
 **Présentation orale** dudit projet via la simulation d’un reporting, et auprès de sa hiérarchie (C20, C22, C24) 👀
